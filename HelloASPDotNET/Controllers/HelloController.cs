@@ -48,8 +48,8 @@ namespace HelloASPDotNET.Controllers
                 case "arabic":
                     hello = "Mrhban";
                     break;
-                case "signlanguage":
-                    hello = "👋";
+                case "signLanguage":
+                    hello = "<h2>&#x1F44B;</h2>";
                     break;
             }
             return $"{hello} {name}";
