@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -17,18 +18,51 @@ namespace HelloASPDotNET.Controllers
         {
             string html = "<form method='post' action='/helloworld/welcome'>" +
                 "<input type='text' name='name' />" +
+                "<select name='language'>" + 
+                "<option value = 'english' selected> English</option>" +
+                "<option value = 'french'> French</option>" +
+                "<option value = 'spanish'> Spanish</option>" +
+                "<option value = 'arabic' > Arabic</option>" +
+                "<option value = 'signLanguage'> SignLanguage</option>" +
                 "<input type='submit' value='Greet Me!' />" +
+                "</select>" +
                 "</form>";
             return Content(html, "text/html");
+        }
+
+        public static string CreateMessage(string name, string language)
+        {
+            string hello = "";
+            switch(language)
+            {
+                case "english":
+                    hello = "Hello";
+                    break;
+
+                case "french":
+                    hello = "Bonjour";
+                    break;
+                case "spanish":
+                    hello = "Hola";
+                    break;
+                case "arabic":
+                    hello = "Mrhban";
+                    break;
+                case "signlanguage":
+                    hello = "👋";
+                    break;
+            }
+            return $"{hello} {name}";
+
         }
 
         // GET: /helloworld/welcome
         // POST: /helloworld/welcome
         [HttpPost("welcome")]
-        [HttpGet("welcome/{name?}")]
-        public IActionResult Welcome(string name = "World")
+        [HttpGet("welcome/{name?}/{language?}")]
+        public IActionResult Welcome(string name = "Tony", string language = "english")
         {
-            return Content("<h1>Welcome to my app, " + name + "!</h1>", "text/html");
+            return Content($"{ CreateMessage(name, language)}", "text/html");
         }
     }
 }
