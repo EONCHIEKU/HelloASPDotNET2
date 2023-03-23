@@ -49,7 +49,7 @@ namespace HelloASPDotNET.Controllers
                     hello = "Mrhban";
                     break;
                 case "signLanguage":
-                    hello = "<h2>&#x1F44B;</h2>";
+                    hello = "&#x1F44B;";
                     break;
             }
             return $"{hello} {name}";
